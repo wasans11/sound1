@@ -8,6 +8,7 @@ from dtaidistance import dtw
 from gtts import gTTS
 import whisper
 import os
+import tempfile
 
 @st.cache_resource
 def load_whisper():
@@ -84,14 +85,16 @@ def main():
     whisper_model = load_whisper()
     processor, wav2vec_model = load_wav2vec()
 
-    uploaded = st.file_uploader("발음 녹음 업로드 (wav/mp3)", type=["wav", "mp3"])
+    uploaded = st.file_uploader("발음 녹음 업로드 (wav/mp3/m4a)", type=["wav", "mp3", "m4a"])
 
     if uploaded:
-        with open("input_audio.wav", "wb") as f:
-            f.write(uploaded.read())
+        suffix = "." + uploaded.name.split(".")[-1]
+        with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+            tmp.write(uploaded.read())
+            tmp_path = tmp.name
 
         with st.spinner("음성 인식 중..."):
-            result = whisper_model.transcribe("input_audio.wav")
+            result = whisper_model.transcribe(tmp_path)
             recognized = result["text"].strip().lower()
 
         st.write(f"**인식된 발음:** {recognized}")
@@ -105,7 +108,7 @@ def main():
         if matched:
             st.write(f"**비교 기준 단어:** {matched}")
             y_ref = load_audio(f"reference/{matched}.mp3")
-            y_input = load_audio("input_audio.wav")
+            y_input = load_audio(tmp_path)
 
             with st.spinner("편차 분석 중..."):
                 dtw_score, jsd_score, pitch_diff, cos_sim, mfcc_ref, mfcc_input = compare(
