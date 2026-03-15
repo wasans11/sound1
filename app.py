@@ -94,14 +94,14 @@ def main():
             tmp_path = tmp.name
 
         with st.spinner("음성 인식 중..."):
-            result = whisper_model.transcribe(tmp_path)
+            result = whisper_model.transcribe(tmp_path, language="en")
             recognized = result["text"].strip().lower()
 
         st.write(f"**인식된 발음:** {recognized}")
 
         matched = None
         for word in words:
-            if word in recognized:
+            if word in recognized or recognized.strip() in word:
                 matched = word
                 break
 
