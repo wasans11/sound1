@@ -123,15 +123,29 @@ def main():
 
             st.subheader(get_feedback(jsd_score, dtw_score, pitch_diff))
 
-            fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-            axes[0].bar(range(13), mfcc_ref, alpha=0.7, label="원어민", color="blue")
-            axes[0].bar(range(13), mfcc_input, alpha=0.7, label="입력", color="red")
-            axes[0].set_title("MFCC 분포 비교")
+            fig, axes = plt.subplots(1, 3, figsize=(18, 4))
+
+            def to_prob(arr):
+                arr = np.abs(arr)
+                return arr / arr.sum()
+
+            axes[0].bar(range(13), mfcc_ref, alpha=0.7, label="native", color="blue")
+            axes[0].bar(range(13), mfcc_input, alpha=0.7, label="input", color="red")
+            axes[0].set_title("MFCC Distribution")
             axes[0].legend()
+
             axes[1].plot(mfcc_ref - mfcc_input, color="purple")
             axes[1].axhline(0, color="black", linestyle="--")
-            axes[1].set_title("편차 (원어민 - 입력)")
-            st.pyplot(fig)
+            axes[1].set_title("Delta (native - input)")
+
+            axes[2].plot(to_prob(mfcc_ref), label="native", color="blue")
+            axes[2].plot(to_prob(mfcc_input), label="input", color="red")
+            axes[2].fill_between(range(13), to_prob(mfcc_ref), to_prob(mfcc_input), alpha=0.3, color="purple")
+            axes[2].set_title(f"JSD Distribution (JSD={jsd_score:.2f})")
+            axes[2].legend()
+
+st.pyplot(fig)
+            
 
         else:
             st.warning(f"'{recognized}' 는 목록에 없는 단어예요. 다시 녹음해보세요")
