@@ -71,9 +71,23 @@ def get_feedback(jsd_score, dtw_score, pitch_diff):
         return "⚠️ 전반적인 발음이 조금 다릅니다"
     else:
         return "❌ 발음 교정이 필요합니다. 원어민 발음을 다시 들어보세요"
+        
+with st.sidebar:
+    st.header("앱 작동 원리")
+    st.markdown("""
+    1. **기준 음성** - gTTS로 원어민 영어 발음 생성
+    2. **업로드** - 내 발음 녹음 후 업로드
+    3. **음성 인식** - Whisper가 단어 자동 인식
+    4. **벡터화** - MFCC로 음성을 벡터로 변환
+    5. **임베딩** - wav2vec으로 딥러닝 특징 추출
+    6. **비교** - DTW로 구간별 편차, JSD로 분포 차이 계산
+    7. **출력** - 편차 시각화 + 발음 피드백
+    """)
+    st.header("학습 단어 목록")
+    st.write("orange, apple, banana, computer, internet, chocolate, camera, energy, coffee, television")
 
 def main():
-    st.title("🎙️ 발음 편차 분석기")
+    st.title("🎙️ 발음 편차 분석기(orange, apple, banana, computer, internet, chocolate, camera, energy, coffee, television)")
     st.caption("원어민 발음과 내 발음의 차이를 분석합니다")
 
     words = [
