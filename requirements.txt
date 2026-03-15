@@ -1,0 +1,9 @@
+gtts
+librosa
+openai-whisper
+transformers
+torch
+streamlit
+dtaidistance
+soundfile
+scipy
