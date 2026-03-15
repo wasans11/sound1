@@ -144,7 +144,7 @@ def main():
             axes[2].set_title(f"JSD Distribution (JSD={jsd_score:.2f})")
             axes[2].legend()
 
-st.pyplot(fig)
+            st.pyplot(fig)
             
 
         else:
