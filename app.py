@@ -87,7 +87,7 @@ with st.sidebar:
     st.write("orange, apple, banana, computer, internet, chocolate, camera, energy, coffee, television")
 
 def main():
-    st.title("🎙️ 발음 편차 분석기(orange, apple, banana, computer, internet, chocolate, camera, energy, coffee, television)")
+    st.title("🎙️ 발음 편차 분석기")
     st.caption("원어민 발음과 내 발음의 차이를 분석합니다")
 
     words = [
