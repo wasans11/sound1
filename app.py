@@ -120,6 +120,7 @@ with st.sidebar:
     5. **임베딩** - wav2vec으로 딥러닝 특징 추출
     6. **비교** - DTW로 구간별 편차, JSD로 분포 차이 계산
     7. **출력** - 편차 시각화 + 발음 피드백
+    8. **AI 해석** - Groq LLM이 MFCC/DTW/JSD 벡터값 기반 발음 피드백 생성
     """)
     st.header("학습 단어 목록")
     st.write("orange, apple, banana, computer, internet, chocolate, camera, energy, coffee, television")
