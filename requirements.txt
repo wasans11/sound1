@@ -8,3 +8,4 @@ dtaidistance
 soundfile
 scipy
 matplotlib
+groq
