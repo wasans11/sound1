@@ -403,16 +403,21 @@ def main():
     cols[4].metric("Jitter(떨림)", f"{jitter:.3f}%")
     cols[5].metric("Shimmer(안정)", f"{shimmer:.3f}%")
 
-# AI 피드백 먼저 생성
-    col_left, col_right = st.columns(2)
+with st.spinner("AI 피드백 생성 중..."):
+        feedback = get_llm_feedback(
+            dtw_score, jsd_score, pitch_diff, cos_sim,
+            jitter, shimmer, timeline, mfcc_ref, mfcc_input, matched
+        )
 
+    with st.spinner("파형 시각화 중..."):
+        wave_fig = plot_waveform_analysis(y_ref, y_input, tmp_path, timeline, word=matched)
+
+    col_left, col_right = st.columns(2)
     with col_left:
         plot_mfcc(mfcc_ref, mfcc_input, jsd_score)
         st.markdown("### 🤖 AI 발음 피드백")
         st.write(feedback)
-
     with col_right:
-        wave_fig = plot_waveform_analysis(y_ref, y_input, tmp_path, timeline, word=matched)
         st.plotly_chart(wave_fig, width='stretch')
 
 if __name__ == "__main__":
