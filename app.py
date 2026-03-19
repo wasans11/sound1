@@ -403,7 +403,7 @@ def main():
     cols[4].metric("Jitter(떨림)", f"{jitter:.3f}%")
     cols[5].metric("Shimmer(안정)", f"{shimmer:.3f}%")
 
-with st.spinner("AI 피드백 생성 중..."):
+    with st.spinner("AI 피드백 생성 중..."):
         feedback = get_llm_feedback(
             dtw_score, jsd_score, pitch_diff, cos_sim,
             jitter, shimmer, timeline, mfcc_ref, mfcc_input, matched
