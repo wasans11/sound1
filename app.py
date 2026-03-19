@@ -267,7 +267,7 @@ def plot_mfcc(mfcc_ref, mfcc_input, jsd_score):
         arr = np.abs(arr)
         return arr / arr.sum()
 
-    fig, axes = plt.subplots(1, 3, figsize=(6, 2))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 3))
 
     axes[0].bar(range(13), mfcc_ref, alpha=0.5, label="Native", color="blue")
     axes[0].bar(range(13), mfcc_input, alpha=0.5, label="Input", color="red")
@@ -286,7 +286,7 @@ def plot_mfcc(mfcc_ref, mfcc_input, jsd_score):
     axes[2].set_title(f"JSD Distribution (JSD={jsd_score:.2f})")
     axes[2].legend()
 
-    st.pyplot(fig)
+    st.pyplot(fig, use_container_width=False)
 
 # --- 6. LLM 피드백 ---
 
