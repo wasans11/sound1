@@ -1,11 +1,22 @@
-gtts
-librosa
-openai-whisper
-transformers
-torch
+# --- 기본 라이브러리 ---
 streamlit
-dtaidistance
-soundfile
-scipy
+numpy
+pandas
 matplotlib
+scipy
+librosa
+
+# --- 음성 처리 & 분석 ---
+dtaidistance
+praat-parselmouth
+gTTS
+openai-whisper
+
+# --- 딥러닝 (Wav2Vec2 및 실행용) ---
+torch
+transformers
+torchaudio
+
+# --- AI & 시각화 ---
 groq
+plotly
