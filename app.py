@@ -267,7 +267,7 @@ def plot_mfcc(mfcc_ref, mfcc_input, jsd_score):
         arr = np.abs(arr)
         return arr / arr.sum()
 
-    fig, axes = plt.subplots(1, 3, figsize=(12, 3))
+    fig, axes = plt.subplots(1, 3, figsize=(6, 2))
 
     axes[0].bar(range(13), mfcc_ref, alpha=0.5, label="Native", color="blue")
     axes[0].bar(range(13), mfcc_input, alpha=0.5, label="Input", color="red")
