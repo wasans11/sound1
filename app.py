@@ -16,6 +16,7 @@ import torch
 from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC, Wav2Vec2Model
 import parselmouth
 from groq import Groq
+import soundfile as sf
 
 # --- 0. 설정 ---
 st.set_page_config(layout="wide", page_title="말모리 AI 발음 분석기")
@@ -361,8 +362,14 @@ def main():
 
     suffix = "." + uploaded.name.split(".")[-1]
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-        tmp.write(uploaded.read())
-        tmp_path = tmp.name
+         tmp.write(uploaded.read())
+         orig_path = tmp.name
+
+# wav로 변환 (parselmouth용)
+    y_wav, sr_wav = librosa.load(orig_path, sr=16000)
+    wav_path = orig_path.replace(suffix, ".wav")
+    sf.write(wav_path, y_wav, sr_wav)
+    tmp_path = wav_path
 
     with st.spinner("음성 인식 중..."):
         result = whisper_model.transcribe(tmp_path, language="en")
