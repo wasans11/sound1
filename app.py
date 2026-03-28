@@ -19,7 +19,7 @@ from groq import Groq
 import soundfile as sf
 
 # --- 0. 설정 ---
-st.set_page_config(layout="wide", page_title="말모리 AI 발음 분석기")
+st.set_page_config(layout="wide", page_title="AI 발음 분석기")
 
 WORDS = ["orange", "apple", "banana", "computer", "internet",
          "chocolate", "camera", "energy", "coffee", "television"]
