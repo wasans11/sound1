@@ -421,7 +421,7 @@ def main():
         st.plotly_chart(wave_fig, width='stretch')
     st.markdown("---")
     st.markdown("### 🧠 시스템 설계도")
-    st.image("images/blueprint.jpg", use_column_width=True)
+    st.image("blueprint.jpg", use_column_width=True)
 
 if __name__ == "__main__":
     main()
