@@ -296,7 +296,7 @@ def get_llm_feedback(dtw_score, jsd_score, pitch_diff, cos_sim,
     delta = (mfcc_ref - mfcc_input).tolist()
 
     prompt = f"""
-당신은 '말모리'의 AI 한국어(영어) 발음 교정 전문가입니다.
+당신은 AI 한국어(영어) 발음 교정 전문가입니다.
 아래 수치를 기반으로 맞춤 피드백을 한국어로 주세요.
 
 분석 단어: {word}
@@ -347,7 +347,7 @@ with st.sidebar:
 # --- 8. 메인 ---
 
 def main():
-    st.title("🎙️ 말모리 : AI 발음 편차 분석기")
+    st.title("🎙️AI 발음 편차 분석기")
     st.caption("고전 음향 신호 처리와 딥러닝을 결합한 정밀 발음 피드백")
 
     generate_reference(WORDS)
